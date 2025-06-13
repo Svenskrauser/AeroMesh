@@ -1,0 +1,151 @@
+/* layout.css */
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body preto */
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Sidebar base */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: #1e40af;
+  color: white;
+  padding: 20px;
+  overflow-y: auto;
+
+  /* No mobile começa escondida à esquerda */
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+/* Links */
+.sidebar a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  color: #38bdf8;
+  background-color: #051747;
+}
+
+/* Sidebar aninhados */
+.sidebar .nested-links {
+  padding-left: 15px;
+  margin-top: 5px;
+}
+
+/* Botão hamburger só aparece no mobile */
+.mobile-menu-button {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: #1e40af;
+  color: white;
+  border: none;
+  font-size: 28px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+/* Overlay para fundo escuro quando sidebar aberta no mobile */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1050;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+  /* Sidebar começa escondida à esquerda */
+  .sidebar {
+    transform: translateX(-100%);
+    z-index: 1100;
+  }
+
+  /* Quando aberta, volta ao lugar */
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Botão hamburger aparece */
+  .mobile-menu-button {
+    display: block;
+  }
+
+  /* Conteúdo principal (main-content) tem margin 0 no mobile */
+  .main-content {
+    margin-left: 0 !important;
+    padding: 20px;
+  }
+
+  /* Footer também */
+  .footer {
+    left: 0 !important;
+    padding-left: 0 !important;
+  }
+}
+
+/* Conteúdo principal, com margin para não ficar atrás da sidebar */
+.main-content {
+  margin-left: 250px;
+  padding: 20px;
+  height: calc(100vh - 40px); /* considerando footer */
+  overflow-y: auto;
+
+  /* Só centraliza horizontalmente */
+  text-align: center;
+}
+
+/* Footer fixo */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;             /* Começa da borda esquerda da tela */
+  width: 100%;         /* Ocupa toda a largura */
+  padding-left: 250px; /* Espaço para sidebar */
+  height: 40px;
+  background-color: #111827; /* cinza escuro */
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  border-top: 1px solid #374151;
+  box-sizing: border-box; /* para garantir que padding não aumente a largura */
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    padding-top: 50px; /* garante espaço no topo para o botão */
+  }
+}
